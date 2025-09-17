@@ -1,31 +1,53 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 function Signup() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", form);
-      alert(res.data.message);
-    } catch (err) {
-      alert(err.response.data.error || "Signup failed");
-    }
+    alert("Signup successful! 🎉 (Dummy flow)");
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" onChange={handleChange} />
-        <input name="email" placeholder="Email" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-        <button type="submit">Signup</button>
+    <div style={{ padding: "20px" }}>
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit} style={{ maxWidth: "300px" }}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
+        <button type="submit" style={{ padding: "8px 16px" }}>Sign Up</button>
       </form>
     </div>
   );

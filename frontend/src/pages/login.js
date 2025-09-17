@@ -1,31 +1,43 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
-      localStorage.setItem("token", res.data.token); // save token for later
-      alert("Login successful!");
-    } catch (err) {
-      alert(err.response.data.error || "Login failed");
-    }
+    alert("Login successful! ✅ (Dummy flow)");
+    navigate("/dashboard");
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="email" placeholder="Email" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-        <button type="submit">Login</button>
+      <form onSubmit={handleSubmit} style={{ maxWidth: "300px" }}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
+        <button type="submit" style={{ padding: "8px 16px" }}>Login</button>
       </form>
     </div>
   );

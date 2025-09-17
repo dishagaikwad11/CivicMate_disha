@@ -1,21 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Complaint from "./pages/Complaint";
+
 function App() {
   return (
     <Router>
-      <div>
-        <h1>Hello from CivicMate 🚀</h1>
-        <nav>
-          <Link to="/signup">Signup</Link> | <Link to="/login">Login</Link>
-        </nav>
+      <nav style={{ padding: "10px", background: "#eee" }}>
+        <Link to="/" style={{ margin: "0 10px" }}>Home</Link>
+        <Link to="/signup" style={{ margin: "0 10px" }}>Sign Up</Link>
+        <Link to="/login" style={{ margin: "0 10px" }}>Login</Link>
+        <Link to="/dashboard" style={{ margin: "0 10px" }}>Dashboard</Link>
+        <Link to="/complaint" style={{ margin: "0 10px" }}>Complaint</Link>
+      </nav>
 
-        <Routes>
-          <Route path="/signup" element={<h2>Signup Page</h2>} />
-          <Route path="/login" element={<h2>Login Page</h2>} />
-          <Route path="/" element={<h2>Welcome Home</h2>} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/complaint" element={<Complaint />} />
+      </Routes>
     </Router>
   );
 }
