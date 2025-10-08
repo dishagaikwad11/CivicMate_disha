@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+function Signup() {
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -11,14 +11,23 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Login successful! ✅ (Dummy flow)");
-    navigate("/dashboard");
+    alert("Signup successful! 🎉 (Dummy flow)");
+    navigate("/login"); // After signup, redirect to login
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Login</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: "300px" }}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          value={formData.name}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+          required
+        />
         <input
           type="email"
           name="email"
@@ -37,10 +46,10 @@ function Login() {
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
           required
         />
-        <button type="submit" style={{ padding: "8px 16px" }}>Login</button>
+        <button type="submit" style={{ padding: "8px 16px" }}>Sign Up</button>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

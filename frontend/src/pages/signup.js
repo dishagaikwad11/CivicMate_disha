@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,6 +12,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Signup successful! 🎉 (Dummy flow)");
+    navigate("/login"); // After signup, redirect to login
   };
 
   return (
@@ -23,7 +22,7 @@ function Signup() {
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Full Name"
           value={formData.name}
           onChange={handleChange}
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}

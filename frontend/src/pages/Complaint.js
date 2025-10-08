@@ -1,25 +1,39 @@
 import React, { useState } from "react";
 
 function Complaint() {
-  const [complaint, setComplaint] = useState("");
+  const [formData, setFormData] = useState({ subject: "", description: "" });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Complaint submitted! 📝 (Dummy flow)");
-    setComplaint("");
+    setFormData({ subject: "", description: "" }); // reset form
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>File a Complaint</h2>
+      <h2>Raise Complaint</h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
-        <textarea
-          placeholder="Enter your complaint..."
-          value={complaint}
-          onChange={(e) => setComplaint(e.target.value)}
-          style={{ width: "100%", height: "100px", marginBottom: "10px", padding: "8px" }}
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
           required
-        ></textarea>
+        />
+        <textarea
+          name="description"
+          placeholder="Complaint Description"
+          value={formData.description}
+          onChange={handleChange}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px", minHeight: "100px" }}
+          required
+        />
         <button type="submit" style={{ padding: "8px 16px" }}>Submit</button>
       </form>
     </div>
