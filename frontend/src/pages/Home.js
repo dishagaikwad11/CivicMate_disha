@@ -1,55 +1,29 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Home.css";
 
-function Home() {
-  const navigate = useNavigate();
-
+const Home = () => {
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>CivicMate</h1>
-      <p>Building stronger cities through citizen participation</p>
+    <div className="home-container">
+      <header className="home-header">
+        <h1>Welcome to CivicMate!</h1>
+      </header>
 
-      <div style={{ marginTop: "30px" }}>
-        <button
-          onClick={() => navigate("/login")}
-          style={{
-            padding: "10px 20px",
-            marginRight: "10px",
-            background: "#0077cc",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => navigate("/signup")}
-          style={{
-            padding: "10px 20px",
-            background: "#28a745",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
+      <section className="home-hero">
+        <p>Discover how CivicMate works and make your city better.</p>
+        <Link to="/knowmore">
+          <button>Know More</button>
+        </Link>
+      </section>
 
-      <div style={{ marginTop: "40px" }}>
-        <h3>Features</h3>
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          <li>🧾 Report civic issues easily</li>
-          <li>📊 Track issue resolution progress</li>
-          <li>💬 Connect with local authorities</li>
-          <li>🤝 Collaborate with your community</li>
-        </ul>
+      {/* Cards / Stats */}
+      <div className="home-cards">
+        <div className="home-card">Open Complaints: 12</div>
+        <div className="home-card">Resolved: 34</div>
+        <div className="home-card">Rewards: 120 pts</div>
       </div>
     </div>
   );
-}
+};
 
 export default Home;

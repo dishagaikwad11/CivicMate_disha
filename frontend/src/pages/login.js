@@ -1,55 +1,86 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaGoogle, FaFacebookF } from "react-icons/fa";
+import "./Auth.css";
 
-function Signup() {
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Signup successful! 🎉 (Dummy flow)");
-    navigate("/login"); // After signup, redirect to login
+  const handleForgotPassword = () => {
+    alert("Forgot Password feature coming soon!");
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: "300px" }}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-          required
-        />
-        <button type="submit" style={{ padding: "8px 16px" }}>Sign Up</button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Login to CivicMate</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          <div className="auth-options">
+            
+            <button
+              type="button"
+              className="forgot-btn"
+              onClick={handleForgotPassword}
+            >
+              Forgot Password?
+            </button>
+          </div>
+
+          <button type="submit" className="auth-btn">
+            Login
+          </button>
+        </form>
+
+        <div className="social-login">
+          <button className="social-btn google">
+            <FaGoogle /> Login with Google
+          </button>
+          <button className="social-btn facebook">
+            <FaFacebookF /> Login with Facebook
+          </button>
+        </div>
+
+        <p>
+          Don’t have an account?{" "}
+          <span onClick={() => navigate("/signup")} className="auth-link">
+            Sign Up
+          </span>
+        </p>
+      </div>
     </div>
   );
-}
+};
 
-export default Signup;
+export default Login;
